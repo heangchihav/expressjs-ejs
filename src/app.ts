@@ -1,13 +1,13 @@
-const express = require('express');
-const path = require('path');
-const expressLayouts = require('express-ejs-layouts');
+import express, { Request, Response } from 'express';
+import path from 'path';
+import expressLayouts from 'express-ejs-layouts';
 
 const app = express();
-const port = 3000;
+const port: number = 3000;
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '../views'));
 
 // Set up EJS layouts
 app.use(expressLayouts);
@@ -16,37 +16,36 @@ app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
 
 // Serve static files from the public directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Routes
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   res.render('index', { 
     title: 'EJS App',
     message: 'Welcome to your EJS application!'
   });
 });
 
-app.get('/about', (req, res) => {
+app.get('/about', (req: Request, res: Response) => {
   res.render('about', { 
     title: 'About Us',
     content: 'This is a simple Express.js application with EJS templating.'
   });
 });
 
-app.get('/service', (req, res) => {
+app.get('/service', (req: Request, res: Response) => {
   res.render('service', { 
     title: 'Services',
     content: 'This is a simple Express.js application with EJS templating.'
   });
 });
 
-app.get('/contact', (req, res) => {
+app.get('/contact', (req: Request, res: Response) => {
   res.render('contact', { 
     title: 'Contact Us',
     content: 'This is a simple Express.js application with EJS templating.',
     email: 'contact@example.com',
     phone: '123-456-7890',
-    
   });
 });
 
