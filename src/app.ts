@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
 import expressLayouts from 'express-ejs-layouts';
+import router from './api/v1/routes';
 
 const app = express();
 const port: number = 3000;
@@ -17,37 +18,7 @@ app.set('layout extractScripts', true);
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, '../public')));
-
-// Routes
-app.get('/', (req: Request, res: Response) => {
-  res.render('index', { 
-    title: 'EJS App',
-    message: 'Welcome to your EJS application!'
-  });
-});
-
-app.get('/about', (req: Request, res: Response) => {
-  res.render('about', { 
-    title: 'About Us',
-    content: 'This is a simple Express.js application with EJS templating.'
-  });
-});
-
-app.get('/service', (req: Request, res: Response) => {
-  res.render('service', { 
-    title: 'Services',
-    content: 'This is a simple Express.js application with EJS templating.'
-  });
-});
-
-app.get('/contact', (req: Request, res: Response) => {
-  res.render('contact', { 
-    title: 'Contact Us',
-    content: 'This is a simple Express.js application with EJS templating.',
-    email: 'contact@example.com',
-    phone: '123-456-7890',
-  });
-});
+app.use(router);
 
 // Start the server
 app.listen(port, () => {
